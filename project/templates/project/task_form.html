@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if object.id %}
+        <h2>Edit task</h2>
+    {% else %}
+        <h2>Add task</h2>
+    {% endif %}
+
+    <form action="{{ action }}" method="POST">
+        {% csrf_token %}
+        <ul>
+            {{ form.as_table }}
+        </ul>
+        <input id="save_task" type="submit" value="Save">
+    </form>
+    <a href="{% url 'tasks-list' %}">back to tasks list</a>
+    {% if object.id %}
+        <a href="{% url "task-delete" pk=object.id %}">Delete</a>
+    {% endif %}
+{% endblock content %}
